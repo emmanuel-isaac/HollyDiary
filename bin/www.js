@@ -6,6 +6,8 @@ var app = require('./../app');
 //   console.log('Listening on port 3000');
 // });
 
+app.set('port', (process.env.PORT || 3000));
+
 app.listen(app.get('port', function () {
   console.log('Listening on port 3000');
 }))

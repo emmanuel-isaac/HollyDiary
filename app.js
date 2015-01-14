@@ -19,6 +19,6 @@ app.use('/', actors);
 
 app.use(express.static('public'));
 
-app.set('port', (process.env.PORT || 3000));
+
 
 module.exports = app;
