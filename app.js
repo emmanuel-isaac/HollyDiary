@@ -19,10 +19,5 @@ app.use('/', actors);
 
 app.use(express.static('public'));
 
-app.set('port', (process.env.PORT || 5000));
-
-app.listen(app.get('port'), function () {
-  console.log('Listening on port 5000');
-});
 
 module.exports = app;
