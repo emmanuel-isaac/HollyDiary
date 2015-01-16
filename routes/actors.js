@@ -14,18 +14,11 @@ var postAndPut = function (actorInfo) {
     year: +newActor.year || ""
   };
 
-  var movieFunction = function () {
-    var movies;
-    for (movie in newActor.movies) {
-      movies = movie;
-    }
-    return movies;
-  };
   var newActorObject = {
     name: newActor.name || "",
     dateOfBirth: [dateOfBirth] || "",
     sex: newActor.sex || "",
-    movies: movieFunction(),
+    movies: newActor.movies,
     rating: (+newActor.rating),
     lightSkinned: newActor.lightSkinned || false,
     about: newActor.about || ""
