@@ -10,7 +10,7 @@ var actorSchema = new mongoose.Schema({
   name: {type: String},
   dateOfBirth: [dateOfBirthSchema],
   sex: {type: String},
-  movies: [String],
+  movies: {type: Array},
   rating: {type: Number, required: true, min: 0, max: 5},
   lightSkinned: {type: Boolean, required: true, default: false},
   about: {type: String}
