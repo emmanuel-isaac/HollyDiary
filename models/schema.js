@@ -7,10 +7,10 @@ var dateOfBirthSchema = new mongoose.Schema({
 });
 
 var actorSchema = new mongoose.Schema({
-  name: {type: String},
+  name: {type: String, required: true},
   dateOfBirth: [dateOfBirthSchema],
-  sex: {type: String},
-  movies: {type: Array},
+  sex: {type: String, required: true},
+  movies: {type: [String], required: true},
   rating: {type: Number, required: true, min: 0, max: 5},
   lightSkinned: {type: Boolean, required: true, default: false},
   about: {type: String}

@@ -8,6 +8,8 @@ var Actor = require('../models/schema');
 
 var postAndPut = function (actorInfo) {
   var newActor = actorInfo;
+  var moviesToPost;
+  console.log(newActor);
   var dateOfBirth = {
     day: +newActor.day || "",
     month: +newActor.month || "",
@@ -15,12 +17,12 @@ var postAndPut = function (actorInfo) {
   };
 
   var newActorObject = {
-    name: newActor.name || "",
-    dateOfBirth: [dateOfBirth] || "",
-    sex: newActor.sex || "",
-    movies: newActor.movies,
+    name: newActor.name,
+    dateOfBirth: [dateOfBirth],
+    sex: newActor.sex,
+    movies: newActor['movies[]'] || '',
     rating: (+newActor.rating),
-    lightSkinned: newActor.lightSkinned || false,
+    lightSkinned: newActor.lightSkinned,
     about: newActor.about || ""
   };
   return newActorObject;
@@ -44,15 +46,12 @@ router.route('/actors')
 .post(parseUrlEncoded, function (request, response) {
   var newActor = request.body;
   var newActorObject = postAndPut(newActor);
+  console.log(newActorObject);
 
-  Actor.create(newActorObject, function (err, words) {
+  Actor.create(newActorObject, function (err, actors) {
     if (err) {
-      response.send(err);
-    }
-
-    Actor.find(function (err, actor) {
-      response.json(actor);
-    });
+      console.log(err);
+    } else response.json(actors);
   });
 });
 
@@ -61,9 +60,11 @@ router.route('/actors/:name')
 .get(function (request, response) {
   var name = request.params.name;
   Actor.find({name: name}, function (err, actor) {
-    if (actor[0]) {
+    if (err) {
+      response.json(err);
+    } else {
       response.json(actor);
-    } else response.sendStatus(400);
+    }
   });
 });
 
@@ -80,13 +81,17 @@ router.route('/actors/:name')
   Actor.update({name: actor}, newData, function (err, actor) {
     if (err) {
       response.send(err);
-    } 
-
-    response.json("Updated Successfully");
+    } else {
+      response.json("Updated Successfully");
+    }  
   });
 })
 
 .delete(parseUrlEncoded, function (request, response) {
+  // var id = request.params.name;
+  // Actor.findByIdAndRemove(id, function () {
+  //   response.json('deleted');
+  // });
   var act = request.params.name;
 
   Actor.find({name: act}, function (err, actor) {
