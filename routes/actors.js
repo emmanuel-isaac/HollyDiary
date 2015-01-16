@@ -17,7 +17,7 @@ var postAndPut = function (actorInfo) {
     name: newActor.name || "",
     dateOfBirth: [dateOfBirth] || "",
     sex: newActor.sex || "",
-    movies: newActor.movies || "",
+    movies: newActor.movies,
     rating: (+newActor.rating),
     lightSkinned: newActor.lightSkinned || false,
     about: newActor.about || ""
