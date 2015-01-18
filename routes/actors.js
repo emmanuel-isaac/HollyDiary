@@ -53,6 +53,9 @@ router.route('/actors')
       console.log(err);
     } else response.json(actors);
   });
+}).delete(parseUrlEncoded, function (request, response) {
+  var newActor = request.body;
+
 });
 
 router.route('/actors/:name')
@@ -88,10 +91,6 @@ router.route('/actors/:name')
 })
 
 .delete(parseUrlEncoded, function (request, response) {
-  // var id = request.params.name;
-  // Actor.findByIdAndRemove(id, function () {
-  //   response.json('deleted');
-  // });
   var act = request.params.name;
 
   Actor.find({name: act}, function (err, actor) {
