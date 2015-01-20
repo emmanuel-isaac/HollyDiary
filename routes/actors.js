@@ -53,9 +53,6 @@ router.route('/actors')
       console.log(err);
     } else response.json(actors);
   });
-}).delete(parseUrlEncoded, function (request, response) {
-  var newActor = request.body;
-
 });
 
 router.route('/actors/:name')
